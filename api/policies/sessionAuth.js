@@ -8,10 +8,10 @@
  *
  */
 module.exports = function(req, res, next) {
-
+  sails.log(req.session.authenticated);
   // User is allowed, proceed to the next policy,
   // or if this is the last policy, the controller
-  if (req.isAuthenticated()) {
+  if (req.session.authenticated) {
     return next();
   }
 

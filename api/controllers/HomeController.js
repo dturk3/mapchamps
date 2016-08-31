@@ -7,7 +7,8 @@
 
 module.exports = {
   index: function(req, res) {  
-    res.view({
+    sails.log(req.user);
+    res.view('home', {
       user: req.user
     });
   },

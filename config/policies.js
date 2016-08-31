@@ -52,7 +52,7 @@ module.exports.policies = {
 '*': 'sessionAuth',
 
   'auth': {
-    '*': true
+    '*': ['passport']
   },
   '/': {
       '*': true

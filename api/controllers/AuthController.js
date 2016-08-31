@@ -23,15 +23,28 @@ module.exports = {
   google: function(req, res) {
     passport.authenticate('google', { failureRedirect: '/login', scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read'] }, function(err, user) {
       req.logIn(user, function(err) {
+        sails.log(user);
         if (err) {
           console.log(err);
           res.view('500');
           return;
         }
-
-        res.redirect('/home/menu');
+        req.session.authenticated = true;
+        res.redirect('/');
         return;
       });
     })(req, res);
-  }
+  },
+      callback: function(req, res) {
+          req._passport.instance.callback(req, res, function(req, res, next) {
+              sails.log(req.user);
+          });  
+       
+        // Mark the session as authenticated to work with default Sails sessionAuth.js policy
+        req.session.authenticated = true;
+        
+        // Upon successful login, send the user to the homepage were req.user
+        // will be available.
+        res.redirect('/home');
+      }
 };
