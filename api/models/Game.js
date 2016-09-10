@@ -14,6 +14,10 @@ module.exports = {
           type: 'string',
           primaryKey: true
       },
+      numberRounds: {
+          type: 'integer',
+          required: true
+      },
       turnTimeSeconds: {
           type: 'integer',
           required: true
@@ -30,8 +34,17 @@ module.exports = {
           type: 'integer',
           required: true
       },
+      startTime: {
+          type: 'dateTime'
+      },
+      endTime: {
+          type: 'dateTime'
+      },
       regions: {
           collection: 'region'
+      },
+      players: {
+          collection: 'user'
       }
   }
 };
